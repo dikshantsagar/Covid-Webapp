@@ -25,14 +25,16 @@
 
     <div class="uk-container">
         
-        <div class="uk-card uk-card-secondary uk-card-body uk-width-1-1@m  uk-heading-small round uk-margin-top">
-            <h3 class ="uk-position-center" style="color: #3FADA8;" ><i class="fal fa-heart-rate"></i> ElectroCardioGram (ECG) Analyzer <i class="fal fa-heart-rate"></i></h3>
+        <div class="uk-card uk-card-secondary uk-card-body uk-width-1-1@m  uk-heading-small round uk-margin-top" style="padding: 15px;">
+            <img src="/static/images/iiitd.png" width="100px" height="auto" style="margin-top: 7px;">
+            <img src="/static/images/sbilogo.png" width="65px" height="auto" class="uk-align-right" style="margin: 0;">
+            <h3 class ="uk-position-center"  style="color: #3FADA8;  font-size: 1.8vw; margin-top: 0px;"> Covid Severity Calculator</h3>
         </div>
         
         <div class="uk-card uk-card-default uk-card-body uk-width-1-1@m uk-overflow-auto round uk-margin-large-bottom"  uk-height-viewport="offset-bottom: 20">
-            <a href="/app" class="uk-position-left uk-margin-top uk-margin-left " style="color: #222;"><span uk-icon="icon: arrow-left; ratio: 2"></span></a>
+            <a href="/" class="uk-position-left uk-margin-top uk-margin-left " style="color: #222;"><span uk-icon="icon: arrow-left; ratio: 2"></span></a>
             
-            <div class="uk-inline uk-position-right uk-margin-top uk-margin-large-right" >
+            <!-- <div class="uk-inline uk-position-right uk-margin-top uk-margin-large-right" >
                 <button type="button"  id="reviewform" style="background: none; border: none;"><span uk-icon="file-edit"></span></button>
                 <div uk-dropdown class="round" >
                     <h4>Are we correct ? </h4>
@@ -46,36 +48,36 @@
                         <button class="uk-button uk-button-primary uk-margin round" id="review">Submit</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="uk-inline uk-position-right uk-margin-top uk-margin-right">
+            <!-- <div class="uk-inline uk-position-right uk-margin-top uk-margin-right">
                 <button type="button" class="uk-border-circle" style="background: none; border: none;"><span uk-icon="question"></span></button>
                 <div uk-dropdown class="round" style="height: 300px; width: 300px;">
                     <img src="/static/images/grid.png" width="250px" height="auto">
                 </div>
-            </div>
+            </div> -->
             
-            <h4 class="uk-text-center uk-margin-remove-top">DISEASE PREDICTIONS</h4>
+            <h4 class="uk-text-center uk-margin-remove-top">PREDICTION</h4>
             <table class="uk-table uk-table-divider uk-table-small uk-align-center" style="width: 30vw; border: 1px solid lightgray; display: table;">
                 <thead>
-                    <th>Disease</th>
+                    <th>Severity</th>
                     <th>Probability</th>
                 </thead>
                 <tbody>
-                    {% for cl, pr in probs %}
+                    
                     <tr>
-                        <td>{{ cl }} </td>
-                        <td>{{ pr }}%</td>
+                        <td>{{ pred }} </td>
+                        <td>{{ probs }}%</td>
                     </tr>
                     
-                    {% endfor %}
+                    
                 </tbody>
             </table>
             <h4 class="uk-text-center uk-margin-large-top">INTERPRETABILITY</h4>
-            <p><span class="uk-badge" style="height: 20px; width: 20px; border-radius: 0px; background-color: red;"></span>
-                (Red) [ Segments of the ECG Data that most contribute to the predicted disease ]</p>
-                
             
+            <div style="text-align: center;">
+                <img src="static/data/shap.png" style="width: auto; height: 600px;">
+            </div>
             
             <ul class="uk-tab" uk-switcher="animation: uk-animation-slide-top-small" >
                 {% for cl in classes %}

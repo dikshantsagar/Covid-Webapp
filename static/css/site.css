@@ -7804,7 +7804,8 @@ ul.uk-nav-sub {
 
   /* Quarters */
   .uk-width-1-4\@m {
-    width: 25%;
+    width: 24%;
+    margin-right: 10px;
   }
 
   .uk-width-3-4\@m {

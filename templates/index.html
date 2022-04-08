@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECG</title>
+    <title>Covid</title>
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -28,154 +28,263 @@
     <div class="uk-container">
         {% csrf_token %}
         
-        <div uk-grid class="uk-card uk-card-default uk-card-body uk-width-1-1@m round uk-padding " uk-height-viewport="offset-bottom: 17" style="margin-left: 0; margin-top: 7vh; padding-left: 0; margin-bottom: 10vh;">
-            <div class="uk-width-1-2@m">
-                <div class="uk-card uk-card-secondary uk-card-body uk-width-1-1@m   uk-margin round ">
-                    <h3 class ="uk-position-center"  style="color: #3FADA8;  font-size: 1.8vw;"> <i class="fal fa-heart-rate"></i> ElectroCardioGram (ECG) Analyzer <i class="fal fa-heart-rate"></i></h3>
-                </div>
+        <div uk-grid class=""  style="margin-left: 0; margin-top: 5vh; margin-bottom: 10vh;">
+            <div class="uk-card uk-card-secondary  uk-width-1-1@m  round " style="padding: 15px;">
+                <img src="/static/images/iiitd.png" width="100px" height="auto" style="margin-top: 7px;">
+                <img src="/static/images/sbilogo.png" width="65px" height="auto" class="uk-align-right" style="margin: 0;">
+                <h3 class ="uk-position-center"  style="color: #3FADA8;  font-size: 1.8vw; margin-top: 0px;"> Covid Severity Calculator</h3>
+                
+            </div>
+            <div class="uk-width-1-1@m" style="padding-left: 0;">
+                
                 <div class="uk-card uk-card-default uk-card-body uk-width-1-1@m uk-margin round info uk-padding uk-box-shadow-large uk-height-max-large" >
-                    <img src="/static/images/iiitd.png" width="100px" height="auto">
-                    <img src="/static/images/sbilogo.png" width="65px" height="auto" class="uk-align-right">
+                    
 
                 <div class="uk-align-center uk-text-small infotext">
-                    An interpretable AI model that highlights the abnormal segments of the ECG and predicts the following heart diseases: <br>
-                    <ul>
-                        <li>Conduction Disorder</li>
-                        <li>Cardiac Hypertrophy</li>
-                        <li>Myocardial Infarction</li>
-                        <li>ST/T Change</li>
-                    </ul>
-                    Principal investigators: <a href="https://www.iiitd.ac.in/anubha">Dr. Anubha Gupta</a> and <a href="https://www.linkedin.com/in/manukumarshetty">Dr. Manu Kumar Shetty (MBBS, MD)</a>
-                    
+                    An interpretable AI model that predicts a covid patients severity based on 41 Parameters.</br>                  
 
                     <p style="font-size: smaller;">
-                        <b>Cite: </b>Atul Anand, Tushar Kadian, Manu Kumar Shetty, and Anubha Gupta, "Explainable AI Decision Model for ECG Data of Cardiac Disorders," Under Review, Biomedical Signal Processing and Control, Elsevier, January 2022.<br>
-                        <br><b>Please note:</b> AI model's results need to be confirmed by a cardiologist, the report cannot be used for any type of interventions without a doctor's consent.</p>
+                        <b>Cite: </b>
+                        <br><b>Please note:</b> AI model's results need to be confirmed by a practicing physician, the report cannot be used for any type of interventions without a doctor's consent.
+                    </p>
 
                 </div>
 
                 </div>
 
             </div>
-            <div class="uk-width-1-2@m uk-text-center uk-padding uk-padding-remove-right " style="padding-top: 15%;">
-                    <!-- <h3 class="uk-card-title" id="uploadtitle">Upload ElectroCardioGram Below </h3> -->
-                    <div class="uk-container uk-align-center" id="uploadform">
-                        <button class="uk-button uk-button-large uk-button-default uk-align-center uk-margin-bottom round uk-width-1-1" type="button" uk-toggle="target: #samples-modal" style="font-size: small;"><span uk-icon="download" ></span> Download Sample Files</button>
-                        <div class="js-upload uk-placeholder uk-text-center round" style="border: 1px dashed grey">
-                            <i class="fas fa-cloud-upload-alt fa-lg"></i>
-                            <span class="uk-text-middle">Drop CSV here or</span>
-                            <form uk-form-custom method="post" id="form" enctype="multipart/form-data">
-                                
-                                {{ form }}
-                                <input id="file" type="file" multiple>
-                                <span class="uk-link" >Select One</span>
-                            </form>
-                        </div>
-                        <div id="filenamediv" hidden>
-                            <span uk-icon="icon:file-text; ratio:1" ></span><span id="filename"></span><a href="/app" uk-close></a>
-                            
-                        </div>
-                        
-                        <progress id="js-progressbar" class="uk-progress" value="0" max="100" hidden></progress>
-                        <form action="/predict" id="predictform" method="POST">
-                            {% csrf_token %}
-                            <input class="uk-input uk-text-center  uk-margin-top" type="number" placeholder="Enter Sampling Frequency * (Hz)" id="rate" name="rate" required>
-                            <p style="color: grey; font-size: small;"><b> * </b>Sampling Frequency = [ Total Number of Samples / Time (In Seconds) ].</p>
-                               
-                            
-                            <input type="submit" class="uk-button uk-button-primary uk-button-large uk-align-center round" value="Predict" >
-                                
-                            </div>
-                        </form>
-                        
-                        <progress class="uk-progress" value="5" max="100" id="predictprogress" hidden></progress>
-                    </div>
-                    
-                    
-                    
-                    
-
-            </div>
-            
-            
-
-            
+            <div class="uk-width-1-1@m" style="padding-left: 0;">
                 
-                <div class="round uk-margin-auto-vertical" id="samples-modal" uk-modal>
-                    <div class="uk-modal-dialog uk-modal-body round">
-                        <button class="uk-modal-close-default" type="button" uk-close></button>
-                        <h2 class="uk-margin-bottom">Sample Files ( 100Hz) </h2>
-                        
-                        <ul class="uk-list uk-list-divider">
-                            {% for file, path in samples %}
-                               <li><a class="uk-text-center uk-margin-right uk-margin-large-bottom" href="{{ path }}"><span uk-icon="icon:file-text;ratio:1.5"></span><span>{{ file }} </span></a></li>
-                            {% endfor %}
-                        </ul>
-                        <hr>
-                        
-                    </div>
+                <div class="uk-card uk-card-default uk-card-body uk-width-1-1@m uk-margin round info uk-padding uk-box-shadow-large " >
+                    <h3>Enter Patient's Parameters:</h3>
+                    <form action="/predict" method="POST">
+                        {% csrf_token %}
+                        <div class="uk-grid-row-small uk-child-width-expand@s" uk-grid style="margin-left: 0;">
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Age
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="age">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Duration of Stay
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="dos">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Hemoglobin
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="hemo">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Platelet Count
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="plate">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                MCV
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="mcv">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                MCHC
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="mchc">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                RDW
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="rdw">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Monocytes
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="mono">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Neutrophils Absolute
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="neutro">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Lymphocytes Absolute
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="lympho">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Eosinophils Absolute
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="eosino">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Monocytes Absolute
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="monoabs">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Basophils Absolute
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="baso">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                NLR
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="'nlr">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                LMR
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="lmr">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                NMR
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="nmr">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Total Bilirubin
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="totbil">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Indirect Bilirubin
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="indbil">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                SGPT/ALT
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="sgpt">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                SGOT/AST
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="'sgot">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Total Protein
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="totprot">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Alkali Phosphate
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="alkphos">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Globulin
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="glob">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                A/G ratio
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="agratio">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Albumin
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="albumin">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Urea
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="urea">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Creatini
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="creatine">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Calcium
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="calcium">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Phosphorus
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="phos">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Sodium
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="sodium">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Potassium
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="potassium">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Chloride
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="chloride">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Uric Acid
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="uric">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Ferritin
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="ferritin">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                LDH
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="ldh">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                IL-6
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="il6">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                CRp-Alb
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="crpalb">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                D-Dimer
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="ddimer">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                Fibronigen
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="fibro">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                INR
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="inr">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            <div class="uk-card uk-card-default uk-width-1-4@m uk-width-1-1@s uk-padding round ">
+                                HbA1c
+                                <input class="uk-input round uk-margin-top" type="number" value="0" name="hba1c">
+                                <div class="uk-card-badge uk-label" style="top:0;right:0;"></div>
+                            </div>
+                            
+                            
+                        </div>
+                        <input type="submit" class="uk-button uk-button-primary uk-button-large uk-align-center round" value="Predict" >
+
+                    </form>
+                    
+                    
                     
                 </div>
-           
-            
-            
-            
-        </div>
-    </div>
 
-    <div id="instructions" class="uk-flex-top" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical round">
-            <h4> Instructions</h4>
-            
-    
-            <button class="uk-modal-close-default" type="button" uk-close></button>
-    
-            <div class="uk-position-relative uk-height-medium" uk-slideshow="autoplay: true;pause-on-hover: true;autoplay-interval: 4000;">
-
-                <ul class="uk-slideshow-items infotext" style="height: 200px;">
-                    <li>
-                        <p>Upload ECG Data file with the following specifications:</p>
-                        <ul class="uk-list uk-list-disc uk-list-primary">
-                            <li>CSV file (Comma Separated) with only numerical values.</li>
-                            <li>Data arranged as columns in the lead order: 
-                                <p>[ I , II , III , AVL , AVR , AVF , V1 , V2 , V3 , V4 , V5 , V6 ]</p>
-                            </li>
-                            <li>Atleast 10 seconds of ECG data.</li>
-                        </ul>
-            
-                    </li>
-                    <li>
-                        Select and Upload Data File <br>
-                        <img src="static/images/intro1.gif" alt="">
-                    </li>
-                    <li>
-                        Enter Sampling Rate and Click Predict <br>
-                        <p>
-                            <img src="static/images/intro2.gif" alt="" >
-                        </p>
-                    </li>
-                    <li>
-                        Wait 30-60 Seconds For The Results.<br>
-                        <progress class="uk-progress uk-margin-large" value="50" max="100" ></progress>
-
-                    </li>
-                </ul>
-            
-                <div class="uk-position-bottom-center uk-margin-top">
-                    <ul class="uk-dotnav">
-                        <li uk-slideshow-item="0"><a href="#">Item 1</a></li>
-                        <li uk-slideshow-item="1"><a href="#">Item 2</a></li>
-                        <li uk-slideshow-item="2"><a href="#">Item 3</a></li>
-                        <li uk-slideshow-item="3"><a href="#">Item 4</a></li>
-                    </ul>
-                </div>
-            
             </div>
-    
+            
+            
         </div>
     </div>
-    <div class="uk-position-bottom-center samplevisible">
-        <p style="font-size: small;">Webapp by <b><a class="uk-link-text" href="https://www.linkedin.com/in/dikshant-sagar-1964b7110/">Dikshant Sagar</a></b></p>
+
+  
+    <div class="uk-text-center" style="margin: 0;">
+        <p style="font-size: small; margin: 0; padding-bottom: 5vh;">Webapp by <b><a class="uk-link-text" href="https://www.linkedin.com/in/dikshant-sagar-1964b7110/">Dikshant Sagar</a></b></p>
     </div>
 
     {% if error %}
@@ -184,10 +293,10 @@
     </script>
     {% endif%}
     
-    <!--  Scripts-->
+     <!-- Scripts
     <script>
         UIkit.modal("#instructions").show();
-    </script>
+    </script> -->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="{% static "js/init.js" %}"></script>
     <script src="https://kit.fontawesome.com/e0a08b5c11.js" crossorigin="anonymous"></script>

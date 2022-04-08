@@ -1,4 +1,4 @@
-"""ecg URL Configuration
+"""covid URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -19,11 +19,8 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('app', views.app, name='app'),
-    path('', views.index, name='index'),
+    #path('app', views.app, name='app'),
+    path('', views.app, name='index'),
     path('csvupload', views.upload, name='csvupload'),
-    path('predict', views.predict, name='predict'),
-    path('loginemail', views.loginemail, name="loginemail"),
-    path('verifyotp', views.verifyotp, name="verifyotp"),
-    path('review', views.review, name='review')
+    path('predict', views.predict, name='predict')
 ]
