@@ -1,3 +1,4 @@
+from inspect import indentsize
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
@@ -7,7 +8,7 @@ import numpy as np
 import pandas as pd
 
 import shap
-
+from shap import Explanation
 import math
 
 import matplotlib.pyplot as plt
@@ -161,7 +162,7 @@ def predict(request):
         explainer  = shap.TreeExplainer(clf2_2)
     
     shap_values = explainer.shap_values(values)
-    shap.summary_plot(shap_values[ind], values, feature_names=feats, show=False)
+    shap.waterfall_plot(Explanation(shap_values[ind][0],explainer.expected_value[ind], feature_names=feats), show=False, max_display=10)
     plt.savefig('static/data/shap.png', dpi=600, bbox_inches='tight')
     plt.close()
     
